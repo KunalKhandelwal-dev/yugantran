@@ -1,4 +1,4 @@
-import { motion } from 'motion/react';
+import { motion } from 'framer-motion'; // <-- This is the fix
 import { Instagram, Linkedin, Mail, MapPin, Phone, Sparkles } from 'lucide-react';
 import { useMemo } from 'react';
 
@@ -84,6 +84,62 @@ export default function Footer() {
                 </motion.a>
               ))}
             </div>
+
+            {/* Sponsor Badges (side-by-side and responsive) */}
+            <motion.div
+  initial={{ opacity: 0, y: 10 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.5, delay: 0.15 }}
+  className="mt-6 flex flex-row items-center justify-center gap-4"
+>
+  {/* IMAGE 1 */}
+  <motion.div
+    whileHover={{ y: -5, scale: 1.05 }}
+    transition={{ type: "spring", stiffness: 300 }}
+    whileHover={{ y: -5, scale: 1.05 }}
+  transition={{ type: "spring", stiffness: 300 }}
+  className="
+    relative flex-1 max-w-[176px] p-3 rounded-xl
+    bg-black/30 backdrop-blur-md
+    border-[2px] border-transparent
+    bg-gradient-to-br from-cyan-500/40 to-purple-500/40
+    [background-clip:padding-box,border-box]
+  "
+
+  >
+    <img
+      src="/images/Geeta/univ-1.jpg"
+      alt="Geeta University"
+      className="w-full h-24 object-contain rounded-lg"
+      style={{ display: "block" }}
+    />
+  </motion.div>
+
+  {/* IMAGE 2 */}
+  <motion.div
+    whileHover={{ y: -5, scale: 1.05 }}
+    transition={{ type: "spring", stiffness: 300 }}
+    whileHover={{ y: -5, scale: 1.05 }}
+  transition={{ type: "spring", stiffness: 300 }}
+  className="
+    relative flex-1 max-w-[176px] p-3 rounded-xl
+    bg-black/30 backdrop-blur-md
+    border-[2px] border-transparent
+    bg-gradient-to-br from-cyan-500/40 to-purple-500/40
+    [background-clip:padding-box,border-box]
+  "
+
+  >
+    <img
+      src="/images/Geeta/univ-2.jpg"
+      alt="Geeta Technical Hub"
+      className="w-full h-24 object-contain rounded-lg"
+      style={{ display: "block" }}
+    />
+  </motion.div>
+</motion.div>
+
           </motion.div>
 
           {/* Quick Links */}
@@ -174,7 +230,7 @@ export default function Footer() {
                 <span className="block text-sm text-gray-500 mb-1">Venue</span>
                 <span className="text-white">Geeta University Campus</span>
               </li>
-              <li>
+<li>
                 <span className="block text-sm text-gray-500 mb-1">Expected Participants</span>
                 <span className="text-white">500+</span>
               </li>
