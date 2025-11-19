@@ -99,7 +99,7 @@ export default function Events() {
         category: "innovation",
         description:
         "Showcase your latest tech projects, prototypes, or research ideas.",
-        prize: "₹2000",
+        prize: "Google Certificates",
         gradient: "from-pink-500 to-pink-600",
       },
       {
@@ -126,7 +126,7 @@ export default function Events() {
         category: "entrepreneurship",
         description:
         "Pitch your startup idea and win support from investors and mentors.",
-        prize: "Cash Prize",
+        prize: "Google Certificates",
         gradient: "from-green-500 to-emerald-600",
       },
     ],
