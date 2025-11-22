@@ -19,7 +19,7 @@ export default function Header() {
     { name: 'Team', href: '#team' },
     { name: 'Register', href: '#register' },
     { name: 'Contact', href: '#contact' },
-    { name: 'Brochure', href: '/docs/eventBrochure.pdf', download: true }, // PDF download link
+    { name: 'RuleBook', href: '/docs/ruleBook.pdf', download: true }, // PDF download link
   ];
 
   // 🧩 Smooth scroll with offset for fixed header

@@ -22,7 +22,7 @@ export default function Footer() {
       { name: 'Events', href: '#events' },
       { name: 'Team', href: '#team' },
       { name: 'Register', href: '#register' },
-      { name: 'Brochure', href: '/docs/eventBrochure.pdf', download: true },
+      { name: 'RuleBook', href: '/docs/ruleBook.pdf', download: true },
     ],
     []
   );
