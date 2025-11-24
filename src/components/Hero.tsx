@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { Calendar, MapPin } from "lucide-react";
-import { useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import CircuitSparks from "./CircuitSparks";
 
 export default function Hero() {
@@ -41,6 +41,40 @@ export default function Hero() {
       window.location.href = id;
     }
   };
+
+  // COUNTDOWN LOGIC ==========================================
+const targetDate = new Date("2025-11-26T13:00:00+05:30"); // IST
+
+const [timeLeft, setTimeLeft] = useState({
+  days: 0,
+  hours: 0,
+  minutes: 0,
+  seconds: 0,
+  isOver: false,
+});
+
+useEffect(() => {
+  const interval = setInterval(() => {
+    const now = new Date().getTime();
+    const diff = targetDate.getTime() - now;
+
+    if (diff <= 0) {
+      setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0, isOver: true });
+      clearInterval(interval);
+      return;
+    }
+
+    setTimeLeft({
+      days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+      minutes: Math.floor((diff / (1000 * 60)) % 60),
+      seconds: Math.floor((diff / 1000) % 60),
+      isOver: false,
+    });
+  }, 1000);
+
+  return () => clearInterval(interval);
+}, []);
 
   return (
     <section
@@ -99,15 +133,55 @@ export default function Hero() {
         transition={{ delay: 0.5, duration: 1 }}
       >
         <motion.div className="space-y-8">
-          <motion.div
-            className="inline-block px-8 py-2 rounded-full border border-cyan-400/30 bg-cyan-500/10 shadow-[0_0_25px_rgba(0,255,255,0.4)] backdrop-blur-md"
-            animate={{ opacity: [0.9, 1, 0.9] }}
-            transition={{ duration: 3, repeat: Infinity }}
-          >
-            <span className="text-cyan-300 font-semibold tracking-wider">
-              Annual Tech Fest 2025
-            </span>
-          </motion.div>
+          {/* === COUNTDOWN BADGE (REPLACES Annual Tech Fest 2025) === */}
+<div
+  className="
+    inline-block
+    max-w-[calc(100vw-32px)] /* never wider than viewport minus 32px margin */
+    w-auto
+    px-4 sm:px-8 py-3
+    rounded-full
+    border border-cyan-400/30
+    bg-cyan-500/10
+    shadow-[0_0_25px_rgba(0,255,255,0.4)]
+    backdrop-blur-md
+    select-none
+    overflow-hidden
+  "
+>
+  {timeLeft.isOver ? (
+    <span className="text-red-400 font-orbitron tracking-wider text-xs sm:text-sm md:text-base">
+      REGISTRATION CLOSED
+    </span>
+  ) : (
+    <div
+      className="
+        flex items-center justify-center
+        gap-2 sm:gap-3 max-[380px]:gap-1
+        font-orbitron
+        text-cyan-300
+        text-[10px] sm:text-xs md:text-sm
+        max-[380px]:text-[9px] max-[330px]:text-[8px]
+        tracking-widest
+        min-w-0            /* allow flex children to shrink inside constrained container */
+        sm:whitespace-nowrap /* keep single line on >=sm; allow wrap on extra-small screens */
+      "
+    >
+      <span className="opacity-80">Ends&nbsp;In</span>
+
+      <span className="w-1 h-1 bg-cyan-400 rounded-full shadow-[0_0_8px_rgba(0,255,255,0.8)]" />
+
+      {/* make the time parts allowed to wrap or truncate on very small screens */}
+      <span className="text-cyan-300 font-bold min-w-0">{timeLeft.days}d</span>
+      <span className="text-cyan-300 font-bold min-w-0">{timeLeft.hours}h</span>
+      <span className="text-cyan-300 font-bold min-w-0">{timeLeft.minutes}m</span>
+      <span className="text-cyan-300 font-bold min-w-0">{timeLeft.seconds}s</span>
+    </div>
+  )}
+</div>
+
+
+
 
           {/* === GLowing Title === */}
           <motion.h1
@@ -166,6 +240,7 @@ export default function Hero() {
               <span>Geeta University, Panipat</span>
             </div>
           </div>
+
 
           <div className="flex flex-col sm:flex-row justify-center items-center gap-6 pt-10">
             <motion.a
