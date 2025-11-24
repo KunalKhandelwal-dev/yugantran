@@ -19,6 +19,7 @@ export default function Footer() {
     () => [
       { name: 'Home', href: '#home' },
       { name: 'About', href: '#about' },
+      { name: 'Timeline', href: '#timeline' },
       { name: 'Events', href: '#events' },
       { name: 'Team', href: '#team' },
       { name: 'Register', href: '#register' },

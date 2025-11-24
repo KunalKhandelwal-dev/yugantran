@@ -7,7 +7,7 @@ import SubTeam from "./components/subTeam"
 import Register from './components/Register';
 import Footer from './components/Footer';
 import BackgroundCircuit from './components/BackgroundCircuit';
-// import RacingTrackTimeline from './components/RaceTrackTimeline';
+import RacingTrackTimeline from './components/RaceTrackTimeline';
 import './styles/globals.css';
 
 export default function App() {
@@ -25,7 +25,7 @@ export default function App() {
         <main>
           <Hero />
           <About />
-          {/* <RacingTrackTimeline /> */}
+          <RacingTrackTimeline />
           <Events />
           <Register />
           <Team />
