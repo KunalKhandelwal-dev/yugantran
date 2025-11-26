@@ -43,7 +43,7 @@ export default function Hero() {
   };
 
   // COUNTDOWN LOGIC ==========================================
-const targetDate = new Date("2025-11-26T23:59:00+05:30"); // IST
+const targetDate = new Date("2025-11-27T16:00:00+05:30"); // IST
 
 const [timeLeft, setTimeLeft] = useState({
   days: 0,
