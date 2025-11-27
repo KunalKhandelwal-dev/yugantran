@@ -44,6 +44,9 @@ export default function Header() {
     }
   };
 
+  const registrationDeadline = new Date(2025, 10, 27, 16, 0, 0); // 27 Nov, 4 PM
+const isRegistrationClosed = new Date() > registrationDeadline;
+
   return (
     <motion.header
       initial={{ y: -80 }}
@@ -106,15 +109,25 @@ export default function Header() {
           </div>
 
           {/* CTA Button (Desktop) */}
-          <motion.button
-            type="button"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="hidden md:block px-6 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg font-orbitron hover:glow-cyan transition-all duration-300 cursor-pointer"
-            onClick={() => handleSmoothScroll('#register')}
-          >
-            Register Now
-          </motion.button>
+          {isRegistrationClosed ? (
+  <motion.button
+    type="button"
+    className="hidden md:block px-6 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg font-orbitron hover:glow-cyan transition-all duration-300 cursor-pointer"
+  >
+    Registration Closed
+  </motion.button>
+) : (
+  <motion.button
+    type="button"
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    className="hidden md:block px-6 py-2.5 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg font-orbitron hover:glow-cyan transition-all duration-300 cursor-pointer"
+    onClick={() => handleSmoothScroll('#register')}
+  >
+    Register Now
+  </motion.button>
+)}
+
 
           {/* === NEW: Rectangular University Images (after Register Now button) === */}
           {/* Larger rectangular strips with theme-matching background gradient, subtle glow and 1px gradient border */}
@@ -170,17 +183,27 @@ export default function Header() {
                   </motion.button>
                 )
               )}
-              <motion.button
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  setTimeout(() => handleSmoothScroll('#register'), 400);
-                }}
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.2 }}
-                className="block w-full py-3 text-center bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg font-orbitron text-white"
-              >
-                Register Now
-              </motion.button>
+              {isRegistrationClosed ? (
+  <motion.button
+    type="button"
+    className="block w-full py-3 text-center bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg font-orbitron text-white"
+  >
+    Registration Closed
+  </motion.button>
+) : (
+  <motion.button
+    onClick={() => {
+      setIsMobileMenuOpen(false);
+      setTimeout(() => handleSmoothScroll('#register'), 400);
+    }}
+    whileHover={{ scale: 1.05 }}
+    transition={{ duration: 0.2 }}
+    className="block w-full py-3 text-center bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg font-orbitron text-white"
+  >
+    Register Now
+  </motion.button>
+)}
+
             </div>
           </motion.div>
         )}

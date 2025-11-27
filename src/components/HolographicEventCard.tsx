@@ -152,6 +152,9 @@ export default function HolographicEventCard({
   // Show a small caution badge on the card if there is a note — helps users notice at glance
   const hasCaution = Boolean(noteText);
 
+  const registrationDeadline = new Date(2025, 10, 27, 16, 0, 0); // 27 Nov, 4 PM
+const isRegistrationClosed = new Date() > registrationDeadline;
+
   return (
     <>
       {/* === Event Card === */}
@@ -302,25 +305,37 @@ export default function HolographicEventCard({
             </div>
 
             {/* ✅ Register button only scrolls to form now */}
-            <motion.button
-              onClick={() => {
-                window.dispatchEvent(
-                  new CustomEvent("eventSelected", { detail: title })
-                );
-                onSelectEvent?.(title);
-                setShowModal(false);
+            {isRegistrationClosed ? (
+  <div className="mt-6 text-center">
+    <p className="text-red-400 font-orbitron text-lg mb-2">
+      Registration Closed
+    </p>
+    <p className="text-gray-400 text-sm">
+      Registrations ended on  
+      <span className="text-cyan-400 font-semibold"> 27th Nov, 4:00 PM.</span>
+    </p>
+  </div>
+) : (
+  <motion.button
+    onClick={() => {
+      window.dispatchEvent(
+        new CustomEvent("eventSelected", { detail: title })
+      );
+      onSelectEvent?.(title);
+      setShowModal(false);
 
-                // ✅ Smooth scroll to register form
-                const form = document.getElementById("register");
-                if (form)
-                  form.scrollIntoView({ behavior: "smooth", block: "center" });
-              }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="mt-6 w-full py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-orbitron rounded-lg shadow-lg"
-            >
-              Register for this Event
-            </motion.button>
+      const form = document.getElementById("register");
+      if (form)
+        form.scrollIntoView({ behavior: "smooth", block: "center" });
+    }}
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    className="mt-6 w-full py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-orbitron rounded-lg shadow-lg"
+  >
+    Register for this Event
+  </motion.button>
+)}
+
           </motion.div>
         </motion.div>
       )}

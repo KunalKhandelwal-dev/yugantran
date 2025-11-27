@@ -16,21 +16,21 @@ export default function RaceTrackTimeline() {
     // Memoized event data
     const events = useMemo<EventItem[]>(
         () => [
-            { time: "9:30 – 10:00", title: "Registration & Inauguration", venue: "F-Block & Auditorium", notes: "—" },
-            { time: "10:10 – 10:30", title: "Buffer / Setup Time", venue: "—", notes: "Movement to event venues" },
+            { time: "9:30 – 10:30", title: "Registration & Inauguration", venue: "F-Block & Auditorium", notes: "—" },
+            { time: "9:00 – 10:00", title: "Buffer / Setup Time", venue: "—", notes: "Setup and Movement to event venues" },
+            { time: "10:00 – 1:00", title: "BGMI", venue: "201, 202 (C Block)", notes: "—" },
+            { time: "10:00 – 1:00", title: "Free Fire", venue: "201, 202 (C Block)", notes: "—" },
+            { time: "10:00 – 1:00", title: "Free Fire(Solo)", venue: "201 (C Block)", notes: "—" },
+            { time: "10:00 – 1:00", title: "BGMI(Solo)", venue: "202 (C Block)", notes: "—" },
             { time: "10:30 – 11:00", title: "Startup Bid", venue: "Auditorium", notes: "—" },
+            { time: "10:30 – 11:30", title: "Tekken 7", venue: "307 (C Block)", notes: "—" },
             { time: "11:00 – 11:30", title: "Tech Show", venue: "Auditorium", notes: "—" },
-            { time: "10:30 – 12:00", title: "Free Fire", venue: "207, 208 (C Block)", notes: "—" },
-            { time: "11:00 – 12:00", title: "Poster Making", venue: "201 (C Block)", notes: "—" },
-            { time: "11:30 – 12:30", title: "Tekken 7", venue: "Auditorium", notes: "—" },
-            { time: "12:00 – 12:40", title: "Tech Quiz", venue: "GTH 1 & 2 (C Block)", notes: "—" },
+            { time: "11:30 – 12:30", title: "Tech Quiz", venue: "GTH 1 & 2 (C Block)", notes: "—" },
+            { time: "12:30 – 1:30", title: "Poster Making", venue: "102, 206 (C Block)", notes: "—" },
             { time: "12:40 – 1:30", title: "Lunch Break", venue: "—", notes: "50 minutes" },
-            { time: "1:00 – 2:00", title: "Tech Treasure", venue: "305, 306 (C Block)", notes: "—" },
-            { time: "1:00 – 2:00", title: "Free Fire(Solo)", venue: "201 (C Block)", notes: "—" },
-            { time: "1:00 – 2:00", title: "BGMI(Solo)", venue: "202 (C Block)", notes: "—" },
-            { time: "1:00 – 3:00", title: "BGMI", venue: "207, 208 (C Block)", notes: "—" },
-            { time: "2:00 – 3:00", title: "Code Relay", venue: "GTH 1 & 2 (C Block)", notes: "—" },
-            { time: "3:00 – 4:00", title: "Prize Distribution", venue: "Auditorium", notes: "—" },
+            { time: "1:30 – 2:30", title: "Code Relay", venue: "GTH 1 & 2 (C Block)", notes: "—" },
+            { time: "2:30 – 3:00", title: "Tech Treasure", venue: "305, 306 (C Block)", notes: "—" },
+            { time: "3:00 – 4:20", title: "Prize Distribution", venue: "Auditorium", notes: "—" },
         ],
         []
     );

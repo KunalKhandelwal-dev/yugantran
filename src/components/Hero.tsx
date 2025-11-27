@@ -76,6 +76,9 @@ useEffect(() => {
   return () => clearInterval(interval);
 }, []);
 
+const registrationDeadline = new Date(2025, 10, 27, 16, 0, 0); // 27 Nov 4:00 PM
+const isRegistrationClosed = new Date() > registrationDeadline;
+
   return (
     <section
       id="home"
@@ -257,20 +260,30 @@ useEffect(() => {
             >
               Explore Events
             </motion.a>
-            <motion.a
-              href="#register"
-              whileHover={{ scale: 1.1 }}
-              className="px-10 py-4 border border-cyan-400/40 rounded-lg font-orbitron text-cyan-300 hover:bg-cyan-400/10 transition-all duration-300"
-              onClick={(e) => {
-                const href = (e.currentTarget as HTMLAnchorElement).getAttribute("href") || "";
-                if (href.startsWith("#")) {
-                  e.preventDefault();
-                  handleSmoothScroll(href);
-                }
-              }}
-            >
-              Register Now
-            </motion.a>
+            {isRegistrationClosed ? (
+  <motion.div
+    whileHover={{ scale: 1.05 }}
+    className="px-10 py-4 border border-cyan-400/40 rounded-lg font-orbitron text-cyan-300 hover:bg-cyan-400/10 transition-all duration-300"
+  >
+    Registration Closed
+  </motion.div>
+) : (
+  <motion.a
+    href="#register"
+    whileHover={{ scale: 1.1 }}
+    className="px-10 py-4 border border-cyan-400/40 rounded-lg font-orbitron text-cyan-300 hover:bg-cyan-400/10 transition-all duration-300"
+    onClick={(e) => {
+      const href = (e.currentTarget as HTMLAnchorElement).getAttribute("href") || "";
+      if (href.startsWith("#")) {
+        e.preventDefault();
+        handleSmoothScroll(href);
+      }
+    }}
+  >
+    Register Now
+  </motion.a>
+)}
+
           </div>
         </motion.div>
       </motion.div>

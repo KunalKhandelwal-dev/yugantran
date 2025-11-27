@@ -16,6 +16,7 @@ import {
   TrendingUp,
   Image,
   HelpCircle,
+  XCircle,
   Gamepad,
   Code,
   FolderOpen,
@@ -797,6 +798,10 @@ export default function Register() {
 
   const fileSizeKB = formData.paymentReceipt ? `${(formData.paymentReceipt.size / 1024).toFixed(1)} KB` : "";
 
+const registrationDeadline = new Date(2025, 10, 27, 16, 0, 0);
+const isRegistrationClosed = new Date() > registrationDeadline;
+
+
   /* -----------------------------
      UI
   ----------------------------- */
@@ -814,18 +819,68 @@ export default function Register() {
           <span className="px-4 py-2 glass rounded-full text-sm text-cyan-400 inline-block mb-4">
             Registration
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-orbitron mb-6">
-            <span className="gradient-text">Join</span> YUGANTRAN2.0 2025
-          </h2>
-          <p className="text-gray-400 max-w-3xl mx-auto text-lg">
-            Register now to secure your spot at the most exciting tech fest of
-            the year! Fill details & upload payment receipt to complete.
-          </p>
+          {isRegistrationClosed ? (
+  <>
+    <h2 className="text-4xl md:text-5xl lg:text-6xl font-orbitron mb-6">
+      <span className="gradient-text">Registrations</span> Closed
+    </h2>
+
+    <p className="text-gray-400 max-w-3xl mx-auto text-lg">
+      The registration period for <span className="text-cyan-400 font-semibold"> Yugantran 2.0 </span> has concluded. We extend our sincere appreciation for the tremendous participation.
+    </p>
+  </>
+) : (
+  <>
+    <h2 className="text-4xl md:text-5xl lg:text-6xl font-orbitron mb-6">
+      <span className="gradient-text">Join</span> YUGANTRAN2.0 2025
+    </h2>
+
+    <p className="text-gray-400 max-w-3xl mx-auto text-lg">
+      Register now to secure your spot at the most exciting tech fest of
+      the year! Fill details & upload payment receipt to complete.
+    </p>
+  </>
+)}
+
         </motion.div>
 
         <div className="max-w-2xl mx-auto glass p-6 md:p-12 rounded-2xl glow-blue">
-          {!submitted ? (
-            <form onSubmit={handleSubmit} className="space-y-4">
+
+  {/* 🔥 AUTO CLOSE REGISTRATION CHECK */}
+  {isRegistrationClosed ? (
+    // -----------------------------
+    // REGISTRATION CLOSED UI
+    // -----------------------------
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      className="text-center py-16"
+    >
+      <XCircle className="w-20 h-20 text-red-400 mx-auto mb-6 drop-shadow-[0_0_20px_rgba(255,0,0,0.5)]" />
+
+      <h3 className="text-3xl font-orbitron gradient-text mb-4">
+        Registrations Closed!
+      </h3>
+
+      <p className="text-gray-400 text-lg mb-3">
+        The registration window for
+        <span className="text-cyan-400 font-semibold"> Yugantran 2.0 </span>
+        has officially ended.
+      </p>
+
+      <p className="text-gray-500 text-sm">
+        Thank you for your overwhelming response.  
+        Stay tuned for updates & schedules.
+      </p>
+    </motion.div>
+  ) : (
+    // -----------------------------
+    // IF NOT CLOSED → SHOW YOUR OLD LOGIC
+    // -----------------------------
+    <>
+      {!submitted ? (
+        // 🔥🔥🔥 ENTIRE YOUR EXISTING FORM STARTS HERE (UNCHANGED)
+        <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <InputField
                   label="Full Name"
@@ -1329,30 +1384,54 @@ export default function Register() {
                 )}
               </motion.button>
             </form>
-          ) : (
-            <motion.div ref={successRef} initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-12">
-              <CheckCircle className="w-20 h-20 text-green-400 mx-auto mb-6" />
-              <h3 className="text-3xl font-orbitron gradient-text mb-4">Registration Successful!</h3>
-              <p className="text-gray-400 mb-6">Thank you for registering! Your payment receipt has been received.</p>
-              {(() => {
-                const eventName = lastRegisteredEvent;
-                const whatsapp = eventName ? eventInfo[eventName]?.whatsapp : null;
-                return whatsapp ? (
-                  <div className="mt-6 flex flex-col items-center gap-3">
-                    <p className="text-cyan-300 font-medium">
-                      Join the WhatsApp group for <span className="font-bold">{eventName}</span> to get all updates and announcements!
-                    </p>
-                    <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2 rounded-lg bg-green-500 hover:bg-green-600 text-white font-semibold shadow transition">
-                      <svg viewBox="0 0 32 32" width="22" height="22" fill="currentColor"><path d="M16.001 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.26.6 4.47 1.74 6.41l-1.84 6.73a1.6 1.6 0 0 0 1.96 1.96l6.73-1.84a12.74 12.74 0 0 0 6.41 1.74c7.06 0 12.8-5.74 12.8-12.8s-5.74-12.8-12.8-12.8zm0 23.04c-2.07 0-4.1-.54-5.87-1.56l-.42-.24-5.01 1.37 1.37-5.01-.24-.42a10.23 10.23 0 0 1-1.56-5.87c0-5.66 4.6-10.24 10.24-10.24s10.24 4.58 10.24 10.24-4.6 10.24-10.24 10.24zm5.61-7.67c-.31-.16-1.83-.91-2.11-1.01-.28-.1-.48-.16-.68.16-.2.31-.77 1.01-.94 1.21-.17.2-.35.23-.66.08-.31-.16-1.31-.48-2.5-1.53-.92-.82-1.54-1.83-1.72-2.14-.18-.31-.02-.48.13-.63.13-.13.31-.35.47-.53.16-.18.21-.31.31-.51.10-.2.05-.38-.03-.53-.08-.16-.68-1.63-.93-2.23-.24-.58-.48-.5-.68-.51-.18-.01-.38-.01-.58-.01-.2 0-.53.08-.81.38-.28.31-1.07 1.05-1.07 2.56 0 1.51 1.09 2.97 1.24 3.18.15.2 2.14 3.28 5.19 4.47.73.31 1.3.5 1.74.64.73.23 1.39.2 1.91.12.58-.09 1.83-.75 2.09-1.48.26-.73.26-1.36.18-1.48-.08-.12-.28-.2-.59-.36z" /></svg>
-                      Join WhatsApp Group
-                    </a>
-                    <p className="text-xs text-gray-400 mt-2">Please join the group to receive important event updates and instructions.</p>
-                  </div>
-                ) : null;
-              })()}
-            </motion.div>
+      ) : (
+        // -----------------------------
+        // SUCCESS MESSAGE (UNCHANGED)
+        // -----------------------------
+        <motion.div
+          ref={successRef}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="text-center py-12"
+        >
+          <CheckCircle className="w-20 h-20 text-green-400 mx-auto mb-6" />
+          <h3 className="text-3xl font-orbitron gradient-text mb-4">
+            Registration Successful!
+          </h3>
+          <p className="text-gray-400 mb-6">
+            Thank you for registering! Your payment receipt has been received.
+          </p>
+
+          {(() => {
+            const eventName = lastRegisteredEvent;
+            const whatsapp = eventName ? eventInfo[eventName]?.whatsapp : null;
+            return whatsapp ? (
+              <div className="mt-6 flex flex-col items-center gap-3">
+                <p className="text-cyan-300 font-medium">
+                  Join the WhatsApp group for{" "}
+                  <span className="font-bold">{eventName}</span>!
+                </p>
+
+                <a
+                  href={whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2 rounded-lg bg-green-500 hover:bg-green-600 text-white font-semibold shadow transition"
+                >
+                  Join WhatsApp Group
+                </a>
+
+                <p className="text-xs text-gray-400 mt-2">
+                  Please join the group to receive important updates.
+                </p>
+              </div>
+            ) : null;
+          })()}
+        </motion.div>
           )}
-        </div>
+        </>
+      )}   {/* closes isRegistrationClosed ? ... : ... */}
+    </div>
       </div>
 
       {/* Toast popup */}
